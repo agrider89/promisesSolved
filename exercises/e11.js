@@ -14,7 +14,8 @@
 */
 
 export const usersUrl = 'http://localhost:3000/users/';
-
+import fetch from "node-fetch";
+import { onReject } from "./e9";
 /**
  * @task
  * Create the getLoginList(data) function that follows the requirements:
@@ -26,9 +27,13 @@ export const usersUrl = 'http://localhost:3000/users/';
  * Example: const getLoginList = (data) => {<Your code>}
 */
 
-const getLoginList = () => {
+const getLoginList = (data) => {
   // Your code goes here...
-
+  let newArr = []
+  for(let user of data) {
+    newArr.push(user.login)
+  }
+  return newArr;
 }
 
 /**
@@ -39,7 +44,7 @@ const getLoginList = () => {
 */
 
 // Your code goes here ...
-const getData;
+const getData = fetch(usersUrl);
 
 /**
  * @task 
@@ -53,7 +58,12 @@ const getData;
 */
 
 // Your code goes here ...
-export const result = getData;
+export const result = getData.then((res) => res.json())
+                             .then((data) => {
+                              console.log(getLoginList(data))
+                              return getLoginList(data)
+                            })
+                             .catch((reason) => reason)
 
 
 // === TEST YOURSELF ===

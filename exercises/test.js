@@ -4,3 +4,9 @@
  * to be able to run the functions successfully with
  * ```node exercises/test.js```
 */
+function alwaysThrows() {
+    // Your code goes here...
+    return new Error('OH NOES')
+  }
+
+console.log(alwaysThrows())
